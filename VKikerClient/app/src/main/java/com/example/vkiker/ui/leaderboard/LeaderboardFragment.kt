@@ -1,19 +1,20 @@
 package com.example.vkiker.ui.leaderboard
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.vkiker.NavGraphDirections
 import com.example.vkiker.R
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.objects.ShortUser
 import com.foxdev.vkikermodule.viewmodels.LeaderboardViewModel
-import com.foxdev.vkikermodule.viewmodels.UserViewModel
 
 class LeaderboardFragment : Fragment() {
 
@@ -37,14 +38,14 @@ class LeaderboardFragment : Fragment() {
         stupidViewModel = ModuleContext.leaderboardViewModel;
         stupidViewModel.leaders.observe(viewLifecycleOwner, {
             if (it != null) {
-                binding.shortUserRecycler.adapter = LeaderboardRecyclerAdapter(it);
+                binding.shortUserRecycler.adapter =
+                    LeaderboardRecyclerAdapter(it) { t -> GoToUser(t) };
             } else {
                 binding.shortUserRecycler.adapter =
-                    LeaderboardRecyclerAdapter(emptyList<ShortUser>());
+                    LeaderboardRecyclerAdapter(emptyList<ShortUser>()){t->GoToUser(t)};
             }
         })
         ModuleContext.vKikerServer.loadLeaderboards();
-
 //        stupidViewModel.currentLobby.observe(viewLifecycleOwner,{
 //            if(it!=null){
 //
@@ -52,8 +53,21 @@ class LeaderboardFragment : Fragment() {
 //
 //        });
         //viewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
+        val activity = requireActivity();
+
+//        val host =
+//            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
+//        host.findNavController().navigate(R.id.action_global_battleFragment);
 
         return binding.root;
+    }
+
+    fun GoToUser(userId: String?) {
+        val activity = requireActivity();
+        val host =
+            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
+        val action = NavGraphDirections.actionGlobalPlayerFragment(userId);
+        host.findNavController().navigate(action);
     }
 
 

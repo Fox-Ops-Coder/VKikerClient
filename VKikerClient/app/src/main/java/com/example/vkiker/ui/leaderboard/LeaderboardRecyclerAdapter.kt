@@ -10,7 +10,10 @@ import com.foxdev.vkikermodule.objects.ShortUser
 import com.google.android.material.card.MaterialCardView
 import org.w3c.dom.Text
 
-class LeaderboardRecyclerAdapter(private val shorUsers: List<ShortUser>) :
+class LeaderboardRecyclerAdapter(
+    private val shorUsers: List<ShortUser>,
+    private val goToUserCall: (String?) -> Unit
+) :
     RecyclerView.Adapter<LeaderboardRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,8 +23,8 @@ class LeaderboardRecyclerAdapter(private val shorUsers: List<ShortUser>) :
 
         init {
             name = itemView.findViewById(R.id.userNameShort);
+            card = itemView.findViewById(R.id.shortUserCard);
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,7 +35,11 @@ class LeaderboardRecyclerAdapter(private val shorUsers: List<ShortUser>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.name?.text = shorUsers[position].userId;
+        val userId = shorUsers[position].userId
+        holder.name?.text = userId;
+        holder.card?.setOnClickListener() {
+            goToUserCall(userId);
+        }
     }
 
     override fun getItemCount(): Int {

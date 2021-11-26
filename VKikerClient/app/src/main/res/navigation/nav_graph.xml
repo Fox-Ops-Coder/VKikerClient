@@ -14,7 +14,12 @@
         android:id="@+id/playerFragment"
         android:name="com.example.vkiker.ui.player.PlayerFragment"
         android:label="player_fragment"
-        tools:layout="@layout/player_fragment" />
+        tools:layout="@layout/player_fragment">
+        <argument
+            android:name="UserId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <action
         android:id="@+id/action_global_playerFragment"
         app:destination="@id/playerFragment"
@@ -33,6 +38,16 @@
     <action
         android:id="@+id/action_global_lobbyFragment"
         app:destination="@id/lobbyFragment"
-        app:popUpTo="@id/leaderboardFragment"
+        app:popUpTo="@id/lobbyFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/battleFragment"
+        android:name="com.example.vkiker.ui.battle.BattleFragment"
+        android:label="fragment_battle"
+        tools:layout="@layout/fragment_battle"/>
+    <action
+        android:id="@+id/action_global_battleFragment"
+        app:destination="@id/battleFragment"
+        app:popUpTo="@id/battleFragment"
         app:popUpToInclusive="true" />
 </navigation>
