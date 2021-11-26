@@ -30,7 +30,7 @@ class LeaderboardFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.leaderboard_fragment, container, false);
         binding.lifecycleOwner = viewLifecycleOwner;
         stupidViewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java);
-        stupidViewModel.currentLobbyLiveData.observe(viewLifecycleOwner,{
+        stupidViewModel.currentLobby.observe(viewLifecycleOwner,{
             if(it!=null){
 
             }
