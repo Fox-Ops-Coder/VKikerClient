@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.foxdev.vkikermodule.net.VKikerServer;
-import com.foxdev.vkikermodule.objects.Lobby;
-import com.foxdev.vkikermodule.objects.ShortUser;
+import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
+import com.foxdev.vkikermodule.objects.User;
 
 import java.util.List;
 
@@ -19,21 +19,12 @@ public final class LeaderboardViewModel extends ViewModel {
         this.vKikerServer = vKikerServer;
     }
 
-    public void loadLeaderboard() {
-        vKikerServer.loadLeaderboards();
-    }
-
-    public void loadUser(@NonNull String userId) {
-        vKikerServer.loadUserById(userId);
+    public void loadLeaders() {
+        vKikerServer.loadLeaderBoards();
     }
 
     @NonNull
-    public LiveData<List<ShortUser>> getLeaders() {
+    public LiveData<List<LeaderInfo>> getLeaders() {
         return vKikerServer.getLeaders();
-    }
-
-    @NonNull
-    public LiveData<Lobby> getCurrentLobby() {
-        return vKikerServer.getLobby();
     }
 }

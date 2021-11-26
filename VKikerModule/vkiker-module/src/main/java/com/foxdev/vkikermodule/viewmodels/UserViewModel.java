@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.foxdev.vkikermodule.net.VKikerServer;
+import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 import com.foxdev.vkikermodule.objects.User;
 
 public final class UserViewModel extends ViewModel {
@@ -15,7 +16,11 @@ public final class UserViewModel extends ViewModel {
         this.vKikerServer = vKikerServer;
     }
 
-    public LiveData<User> getUserLiveData() {
+    public void loadUserInfo(@NonNull String userId) {
+        vKikerServer.getUser(userId);
+    }
+
+    public LiveData<UserInfo> getUserLiveData() {
         return vKikerServer.getUserLiveData();
     }
 }

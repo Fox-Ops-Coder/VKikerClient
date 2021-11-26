@@ -1,4 +1,4 @@
-package com.foxdev.vkikermodule.objects;
+package com.foxdev.vkikermodule.net.netobjects;
 
 import com.google.gson.annotations.SerializedName;
 
