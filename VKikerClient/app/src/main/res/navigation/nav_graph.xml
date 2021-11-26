@@ -25,9 +25,4 @@
         app:destination="@id/leaderboardFragment"
         app:popUpTo="@id/leaderboardFragment"
         app:popUpToInclusive="true" />
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.vkiker.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
 </navigation>

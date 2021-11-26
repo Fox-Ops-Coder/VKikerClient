@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.vkiker.R
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
+import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.viewmodels.LeaderboardViewModel
 import com.foxdev.vkikermodule.viewmodels.UserViewModel
 
@@ -29,13 +30,13 @@ class LeaderboardFragment : Fragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.leaderboard_fragment, container, false);
         binding.lifecycleOwner = viewLifecycleOwner;
-        stupidViewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java);
-        stupidViewModel.currentLobby.observe(viewLifecycleOwner,{
-            if(it!=null){
 
-            }
-
-        });
+//        stupidViewModel.currentLobby.observe(viewLifecycleOwner,{
+//            if(it!=null){
+//
+//            }
+//
+//        });
         //viewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
 
         return binding.root;

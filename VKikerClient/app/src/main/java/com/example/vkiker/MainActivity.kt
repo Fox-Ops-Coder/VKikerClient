@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vkiker.databinding.ActivityMainBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import android.content.SharedPreferences
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+FirebaseMessaging.getInstance()
         val host =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
 
