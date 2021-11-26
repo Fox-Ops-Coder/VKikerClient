@@ -2,6 +2,7 @@ package com.foxdev.vkikermodule.net;
 
 import androidx.annotation.NonNull;
 
+import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
@@ -26,4 +27,7 @@ public interface ServerInterface {
     @POST(Endpoints.AUTH)
     @NonNull
     Call<UserAuthDTO.ServerResponseData> Register(@NonNull @Body UserAuthDTO userAuthDTO);
+
+    @GET(Endpoints.DUEL_INVITATION)
+    Call<DuelInvitation.InvitationResponse> InviteToDuel(@NonNull @Body DuelInvitation duelInvitations);
 }

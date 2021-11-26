@@ -4,4 +4,5 @@ public final class Endpoints {
     public static final String LEADERBOARD_ENDPOINT = "/leaderboard";
     public static final String GET_USER = "/user/{userId}";
     public static final String AUTH = "/auth/registration";
+    public static final String DUEL_INVITATION = "";
 }
