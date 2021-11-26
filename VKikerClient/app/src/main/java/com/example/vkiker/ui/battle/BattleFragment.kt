@@ -9,12 +9,14 @@ import androidx.databinding.DataBindingUtil
 import com.example.vkiker.R
 import com.example.vkiker.databinding.FragmentBattleBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
+import kotlin.concurrent.timer
 
 
 class BattleFragment : Fragment() {
 
     private var _binding: FragmentBattleBinding? = null;
     private val binding get() = _binding!!;
+    private var isTimerStopped: Boolean = false;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +25,15 @@ class BattleFragment : Fragment() {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_battle, container, false);
         binding.lifecycleOwner = viewLifecycleOwner;
+        binding.chronometer.start();
+        binding.buttonPauseContinue.setOnClickListener {
+
+            if (isTimerStopped) {
+                binding.chronometer.start();isTimerStopped = false
+            } else {
+                binding.chronometer.stop(); isTimerStopped = true
+            }
+        }
 
         return binding.root;
     }

@@ -13,7 +13,8 @@ import com.example.vkiker.NavGraphDirections
 import com.example.vkiker.R
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import com.foxdev.vkikermodule.context.ModuleContext
-import com.foxdev.vkikermodule.objects.ShortUser
+import com.foxdev.vkikermodule.net.netobjects.LeaderInfo
+
 import com.foxdev.vkikermodule.viewmodels.LeaderboardViewModel
 
 class LeaderboardFragment : Fragment() {
@@ -42,10 +43,10 @@ class LeaderboardFragment : Fragment() {
                     LeaderboardRecyclerAdapter(it) { t -> GoToUser(t) };
             } else {
                 binding.shortUserRecycler.adapter =
-                    LeaderboardRecyclerAdapter(emptyList<ShortUser>()){t->GoToUser(t)};
+                    LeaderboardRecyclerAdapter(emptyList<LeaderInfo>()){t->GoToUser(t)};
             }
         })
-        ModuleContext.vKikerServer.loadLeaderboards();
+        ModuleContext.vKikerServer.loadLeaderBoards();
 //        stupidViewModel.currentLobby.observe(viewLifecycleOwner,{
 //            if(it!=null){
 //
@@ -53,8 +54,8 @@ class LeaderboardFragment : Fragment() {
 //
 //        });
         //viewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
-        val activity = requireActivity();
-
+//        val activity = requireActivity();
+//
 //        val host =
 //            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
 //        host.findNavController().navigate(R.id.action_global_battleFragment);

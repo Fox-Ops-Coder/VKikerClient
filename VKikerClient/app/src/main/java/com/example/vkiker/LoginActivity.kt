@@ -10,7 +10,7 @@ import com.example.vkiker.databinding.ActivityLoginBinding
 import android.util.Log
 import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.current.CurrentUser
-import com.foxdev.vkikermodule.objects.UserAuthDTO
+import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 

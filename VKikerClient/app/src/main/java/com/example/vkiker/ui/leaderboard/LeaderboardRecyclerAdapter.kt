@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkiker.R
-import com.foxdev.vkikermodule.objects.ShortUser
+import com.foxdev.vkikermodule.net.netobjects.LeaderInfo
+
 import com.google.android.material.card.MaterialCardView
 import org.w3c.dom.Text
 
 class LeaderboardRecyclerAdapter(
-    private val shorUsers: List<ShortUser>,
+    private val shorUsers: List<LeaderInfo>,
     private val goToUserCall: (String?) -> Unit
 ) :
     RecyclerView.Adapter<LeaderboardRecyclerAdapter.MyViewHolder>() {
@@ -35,7 +36,7 @@ class LeaderboardRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val userId = shorUsers[position].userId
+        val userId = shorUsers[position].user.ID
         holder.name?.text = userId;
         holder.card?.setOnClickListener() {
             goToUserCall(userId);
