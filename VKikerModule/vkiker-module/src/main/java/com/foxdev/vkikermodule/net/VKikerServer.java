@@ -4,12 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
-import com.foxdev.vkikermodule.net.netobjects.UserInfo;
-import com.foxdev.vkikermodule.objects.User;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
+import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -61,6 +60,27 @@ public final class VKikerServer {
 
             @Override
             public void onFailure(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
+    public void inviteToDuel(@NonNull DuelInvitation duelInvitations,
+                             @NonNull Consumer<DuelInvitation.InvitationResponse> consumer) {
+        serverInterface.InviteToDuel(duelInvitations).enqueue(new Callback<DuelInvitation.InvitationResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DuelInvitation.InvitationResponse> call,
+                                   @NonNull Response<DuelInvitation.InvitationResponse> response) {
+                if (response.isSuccessful()) {
+                    consumer.accept(response.body());
+                } else {
+                    consumer.accept(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DuelInvitation.InvitationResponse> call,
                                   @NonNull Throwable t) {
                 consumer.accept(null);
             }
