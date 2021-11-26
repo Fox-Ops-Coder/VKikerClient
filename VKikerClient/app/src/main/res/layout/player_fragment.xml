@@ -85,9 +85,10 @@
                         android:text="@{player.user.Name}" />
 
                     <TextView
+                        android:id="@+id/playerElo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ELO: load" />
+                        android:text="ELO:load" />
 
 
                 </LinearLayout>
@@ -105,18 +106,18 @@
                         android:id="@+id/BattlesCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="aboba" />
+                        android:text="B" />
 
                     <TextView
                         android:id="@+id/WinRate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="aboba" />
+                        android:text="W" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="aboba" />
+                        android:text="Cups" />
 
                 </LinearLayout>
 
@@ -150,7 +151,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabVs"
@@ -171,7 +171,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsOneOnOne.BattlesCount)}" />
                 </TableRow>
 
                 <TableRow>
@@ -181,8 +181,9 @@
                         android:text="Percent of wins" />
 
                     <TextView
+
                         android:layout_gravity="right"
-                        android:text="50%" />
+                        android:text="@{Double.toString(player.statsOneOnOne.WinsPresent)}" />
                 </TableRow>
 
                 <TableRow>
@@ -193,7 +194,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Double.toString(player.statsOneOnOne.AkvELOn)}" />
                 </TableRow>
 
                 <TableRow>
@@ -204,7 +205,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsOneOnOne.WinsCount)}" />
                 </TableRow>
 
                 <TableRow>
@@ -215,7 +216,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsOneOnOne.DefeatsCount)}" />
                 </TableRow>
 
                 <TableRow>
@@ -226,7 +227,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsOneOnOne.GoalsScoredCount)}" />
                 </TableRow>
 
                 <TableRow>
@@ -237,7 +238,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Double.toString(player.statsOneOnOne.GoalsConcededCount)}" />
                 </TableRow>
             </TableLayout>
 
@@ -253,6 +254,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabVs"
             app:strokeColor="?attr/colorPrimary"
+            android:visibility="invisible"
             app:strokeWidth="1dp">
 
             <TableLayout
@@ -313,7 +315,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsTwoOnTwo.WinsCount)}" />
                 </TableRow>
 
                 <TableRow>
@@ -324,7 +326,7 @@
 
                     <TextView
                         android:layout_gravity="right"
-                        android:text="0" />
+                        android:text="@{Integer.toString(player.statsTwoOnTwo.WinsCountInDefence)}" />
                 </TableRow>
 
                 <TableRow>

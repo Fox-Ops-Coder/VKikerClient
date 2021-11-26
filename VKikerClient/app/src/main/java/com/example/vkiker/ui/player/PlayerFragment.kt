@@ -1,6 +1,7 @@
 package com.example.vkiker.ui.player
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,24 +50,31 @@ class PlayerFragment : Fragment() {
             ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
                     binding.player = it;
+                    binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toString()
+                    binding.BattlesCount.text = "B: " + it.statsOneOnOne.BattlesCount;
+                    binding.BattlesCount.text = "W: " + it.statsOneOnOne.WinsPresent + "%"
                 }
-
             }
             ModuleContext.userViewModel.loadUserInfo(args.userId!!);
         }
 
         binding.tabVs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
+                if(tab!=null){
+                    if(tab.position==0){
+                        binding.TwoVsTwoCard.visibility = View.INVISIBLE;
+                        binding.oneVsOneCard.visibility = View.VISIBLE;
+                    }
+                    else{
+                        binding.TwoVsTwoCard.visibility = View.VISIBLE;
+                        binding.oneVsOneCard.visibility = View.INVISIBLE;
+                    }
+                }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
-            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         });
         return binding.root;
