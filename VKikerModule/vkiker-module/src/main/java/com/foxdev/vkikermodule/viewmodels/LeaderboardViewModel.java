@@ -10,14 +10,11 @@ import com.foxdev.vkikermodule.objects.ShortUser;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 public final class LeaderboardViewModel extends ViewModel {
 
     @NonNull
     private final VKikerServer vKikerServer;
 
-    @Inject
     public LeaderboardViewModel(@NonNull VKikerServer vKikerServer) {
         this.vKikerServer = vKikerServer;
     }

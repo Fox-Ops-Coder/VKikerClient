@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-interface ServerInterface {
+public interface ServerInterface {
     @GET(Endpoints.LEADERBOARD_ENDPOINT)
     @NonNull
     Call<List<ShortUser>> getLeaderBoard();
