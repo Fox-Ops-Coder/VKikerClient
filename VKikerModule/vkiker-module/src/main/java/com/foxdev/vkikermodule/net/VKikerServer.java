@@ -105,11 +105,19 @@ public final class VKikerServer {
                     List<LeaderInfo> leaderInfos = response.body();
 
                     if (leaderInfos != null) {
-                        leaderInfos.sort(Comparator.comparingDouble(o -> o.ELO));
+                        leaderInfos.sort((o1, o2) -> {
+                            if (o1.ELO > o2.ELO) {
+                                return 1;
+                            } else if (o1.ELO < o2.ELO) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        });
 
                         for (int index = 0; index < leaderInfos.size(); ++index) {
-                            leaderInfos.get(index).Number = "#" + index;
-                            leaderInfos.get(index).IntNumber = index;
+                            leaderInfos.get(index).Number = "#" + index + 1;
+                            leaderInfos.get(index).IntNumber = index + 1;
                         }
 
                         leaderLiveData.postValue(leaderInfos);
