@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 
 public class ShortUser {
     @NonNull
+    private String userId;
+    @NonNull
     private String userName;
+
     private int elo;
     private int battleCount;
     private int winnPercentage;
 
     public ShortUser() {
+        userId = "";
         userName = "";
     }
 

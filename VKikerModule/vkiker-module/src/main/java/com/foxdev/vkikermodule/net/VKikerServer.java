@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class VKikerServer {
-    private final static String serverUrl = "http://10.0.6.190:4000/";
+    private final static String serverUrl = "http://10.0.6.190:4000";
 
     @NonNull
     private final ServerInterface serverInterface;
@@ -65,14 +65,14 @@ public final class VKikerServer {
     public void loadUserById(@NonNull String userId) {
         serverInterface.getUser(userId).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
                     userMutableLiveData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 //TODO Do something with error
             }
         });

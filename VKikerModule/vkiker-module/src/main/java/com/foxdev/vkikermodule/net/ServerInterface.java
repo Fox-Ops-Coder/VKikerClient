@@ -12,11 +12,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 interface ServerInterface {
-    @GET("/leaderboard")
+    @GET(Endpoints.LEADERBOARD_ENDPOINT)
     @NonNull
     Call<List<ShortUser>> getLeaderBoard();
 
-    @GET("/users?user=userId")
+    @GET(Endpoints.GET_USER)
     @NonNull
     Call<User> getUser(@NonNull @Query("userId") String userId);
 }
