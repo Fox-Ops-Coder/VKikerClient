@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.vkiker.databinding.ActivityLoginBinding
-import com.example.vkiker.databinding.ActivityMainBinding
-import android.content.SharedPreferences
 import android.util.Log
+import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.current.CurrentUser
+import com.foxdev.vkikermodule.objects.UserAuthDTO
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -30,16 +30,35 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent);
         } else {
-            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
-                if (!it.isSuccessful) {
-                    Log.w(ContentValues.TAG, "Fetching FCM registration token failed", it.exception)
+            binding.buttonLogin.setOnClickListener {
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
+                    if (it.isSuccessful) {
 
-                }
-                val token = it.result
-                Log.d(ContentValues.TAG, "Token= $token");
+                        var userName = binding.editTextTextPersonName.text.toString();
 
-            })
+                        val dto = UserAuthDTO();
+                        dto.fcmToken = it.result;
+                        dto.userName = userName;
 
+                        ModuleContext.vKikerServer.registerUser(dto) {
+                            if (it!=null && it!!.access ) {
+                                user.setCurrentUser(it.userId);
+                            } else {
+                                Log.d("Debug", "user not registered")
+                            }
+                        }
+                        val token = it.result
+                        Log.d(ContentValues.TAG, "Token= $token");
+                    } else {
+                        Log.w(
+                            ContentValues.TAG,
+                            "Fetching FCM registration token failed",
+                            it.exception
+                        )
+                    }
+                });
+
+            }
 
         }
 

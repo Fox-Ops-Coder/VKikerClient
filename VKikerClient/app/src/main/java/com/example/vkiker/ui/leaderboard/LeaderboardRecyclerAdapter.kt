@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkiker.R
+import com.foxdev.vkikermodule.objects.ShortUser
 import com.google.android.material.card.MaterialCardView
 import org.w3c.dom.Text
 
-class LeaderboardRecyclerAdapter():RecyclerView.Adapter<LeaderboardRecyclerAdapter.MyViewHolder>()  {
+class LeaderboardRecyclerAdapter(private val shorUsers: List<ShortUser>) :
+    RecyclerView.Adapter<LeaderboardRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var number: TextView? = null
@@ -17,8 +19,7 @@ class LeaderboardRecyclerAdapter():RecyclerView.Adapter<LeaderboardRecyclerAdapt
         var name: TextView? = null
 
         init {
-//            number = itemView.findViewById(R.id.shortUserNumber);
-//            card = itemView.findViewById(R.id.shortUserCard);
+            name = itemView.findViewById(R.id.userNameShort);
         }
 
     }
@@ -31,10 +32,10 @@ class LeaderboardRecyclerAdapter():RecyclerView.Adapter<LeaderboardRecyclerAdapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.name?.text = shorUsers[position].userId;
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return shorUsers.size;
     }
 }
