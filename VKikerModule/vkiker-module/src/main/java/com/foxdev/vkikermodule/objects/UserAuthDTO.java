@@ -17,6 +17,6 @@ public final class UserAuthDTO {
         public int value;
 
         @SerializedName("userId")
-        public int userId;
+        public String userId;
     }
 }
