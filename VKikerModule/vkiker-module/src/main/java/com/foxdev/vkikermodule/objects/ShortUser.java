@@ -2,7 +2,16 @@ package com.foxdev.vkikermodule.objects;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ShortUser {
+    @SerializedName("id")
+    public String userId;
+    @SerializedName("name")
+    public String id;
+}
+
+/*public class ShortUser {
     @NonNull
     private String userId;
     @NonNull
@@ -49,4 +58,4 @@ public class ShortUser {
     public final void setWinnPercentage(int winnPercentage) {
         this.winnPercentage = winnPercentage;
     }
-}
+}*/
