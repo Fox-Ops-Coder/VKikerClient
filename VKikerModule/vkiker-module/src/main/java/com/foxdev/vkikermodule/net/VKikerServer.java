@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.foxdev.vkikermodule.objects.Lobby;
-import com.foxdev.vkikermodule.objects.ShortUser;
+import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
+import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 import com.foxdev.vkikermodule.objects.User;
-import com.foxdev.vkikermodule.objects.UserAuthDTO;
+import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -25,11 +25,9 @@ public final class VKikerServer {
     @NonNull
     private final ServerInterface serverInterface;
     @NonNull
-    private final MutableLiveData<List<ShortUser>> shortUserLiveData;
+    private final MutableLiveData<List<LeaderInfo>> leaderLiveData;
     @NonNull
-    private final MutableLiveData<Lobby> currentLobby;
-    @NonNull
-    private final MutableLiveData<User> userMutableLiveData;
+    private final MutableLiveData<UserInfo> userLiveData;
 
     public VKikerServer() {
         OkHttpClient okHttpClient = new OkHttpClient()
@@ -43,41 +41,8 @@ public final class VKikerServer {
                 .build()
                 .create(ServerInterface.class);
 
-        shortUserLiveData = new MutableLiveData<>(null);
-        currentLobby = new MutableLiveData<>(null);
-        userMutableLiveData = new MutableLiveData<>(null);
-    }
-
-    public void loadLeaderboards() {
-        serverInterface.getLeaderBoard().enqueue(new Callback<List<ShortUser>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<ShortUser>> call, @NonNull Response<List<ShortUser>> response) {
-                if (response.isSuccessful()) {
-                    shortUserLiveData.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<ShortUser>> call, @NonNull Throwable t) {
-                //TODO Do something with error
-            }
-        });
-    }
-
-    public void loadUserById(@NonNull String userId) {
-        serverInterface.getUser(userId).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                if (response.isSuccessful()) {
-                    userMutableLiveData.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                //TODO Do something with error
-            }
-        });
+        leaderLiveData = new MutableLiveData<>(null);
+        userLiveData = new MutableLiveData<>(null);
     }
 
     public void registerUser(@NonNull UserAuthDTO userAuthDTO,
@@ -101,16 +66,60 @@ public final class VKikerServer {
         });
     }
 
-    @NonNull
-    public LiveData<List<ShortUser>> getLeaders() {
-        return shortUserLiveData;
+    public void getUser(@NonNull String userId) {
+        serverInterface.getUser(userId).enqueue(new Callback<UserInfo>() {
+            @Override
+            public void onResponse(@NonNull Call<UserInfo> call,
+                                   @NonNull Response<UserInfo> response) {
+                if (response.isSuccessful()) {
+                    UserInfo userInfo = response.body();
+
+                    if (userInfo != null) {
+                        userInfo.statsOneOnOne.ComputeFields();
+                        userInfo.statsTwoOnTwo.ComputeFields();
+
+                        userLiveData.postValue(userInfo);
+                    } else {
+                        userLiveData.postValue(null);
+                    }
+                } else {
+                    userLiveData.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserInfo> call,
+                                  @NonNull Throwable t) {
+                userLiveData.postValue(null);
+            }
+        });
     }
-    @NonNull
-    public LiveData<Lobby> getLobby() {
-        return  currentLobby;
+
+    public void loadLeaderBoards() {
+        serverInterface.getLeaderBoard().enqueue(new Callback<List<LeaderInfo>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<LeaderInfo>> call,
+                                   @NonNull Response<List<LeaderInfo>> response) {
+                if (response.isSuccessful()) {
+                    leaderLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<LeaderInfo>> call,
+                                  @NonNull Throwable t) {
+                leaderLiveData.postValue(null);
+            }
+        });
     }
+
     @NonNull
-    public LiveData<User> getUserLiveData() {
-        return userMutableLiveData;
+    public LiveData<List<LeaderInfo>> getLeaders() {
+        return leaderLiveData;
+    }
+
+    @NonNull
+    public LiveData<UserInfo> getUserLiveData() {
+        return userLiveData;
     }
 }
