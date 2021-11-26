@@ -9,6 +9,7 @@ import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 import com.foxdev.vkikermodule.objects.User;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -101,7 +102,22 @@ public final class VKikerServer {
             public void onResponse(@NonNull Call<List<LeaderInfo>> call,
                                    @NonNull Response<List<LeaderInfo>> response) {
                 if (response.isSuccessful()) {
-                    leaderLiveData.postValue(response.body());
+                    List<LeaderInfo> leaderInfos = response.body();
+
+                    if (leaderInfos != null) {
+                        leaderInfos.sort(Comparator.comparingDouble(o -> o.ELO));
+
+                        for (int index = 0; index < leaderInfos.size(); ++index) {
+                            leaderInfos.get(index).Number = "#" + index;
+                            leaderInfos.get(index).IntNumber = index;
+                        }
+
+                        leaderLiveData.postValue(leaderInfos);
+                    } else {
+                        leaderLiveData.postValue(null);
+                    }
+                } else {
+                    leaderLiveData.postValue(null);
                 }
             }
 
