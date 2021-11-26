@@ -13,8 +13,8 @@ public final class UserAuthDTO {
         @SerializedName("access")
         public boolean access;
 
-        @SerializedName("test")
-        public int value;
+        @SerializedName("message")
+        public String message;
 
         @SerializedName("userId")
         public String userId;
