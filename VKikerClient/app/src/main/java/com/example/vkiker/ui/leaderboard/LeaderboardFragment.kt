@@ -67,7 +67,8 @@ class LeaderboardFragment : Fragment() {
         val activity = requireActivity();
         val host =
             activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
-        val action = NavGraphDirections.actionGlobalPlayerFragment(userId);
+        val action = NavGraphDirections.actionGlobalPlayerFragment();
+        action.userId = userId;
         host.findNavController().navigate(action);
     }
 

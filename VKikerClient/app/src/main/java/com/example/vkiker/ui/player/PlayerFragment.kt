@@ -1,15 +1,18 @@
 package com.example.vkiker.ui.player
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.vkiker.R
-import com.example.vkiker.databinding.LobbyFragmentBinding
 import com.example.vkiker.databinding.PlayerFragmentBinding
+import com.foxdev.vkikermodule.context.ModuleContext
+import com.foxdev.vkikermodule.current.CurrentUser
 import com.google.android.material.tabs.TabLayout
 
 class PlayerFragment : Fragment() {
@@ -31,6 +34,27 @@ class PlayerFragment : Fragment() {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.player_fragment, container, false);
         binding.lifecycleOwner = viewLifecycleOwner;
+
+        val args: PlayerFragmentArgs by navArgs();
+        val storageName = getString(R.string.loginStorageName)
+        val mySharedPreferences =
+            requireActivity().getSharedPreferences(storageName, Context.MODE_PRIVATE);
+        val user = CurrentUser(mySharedPreferences);
+        val CurrentUserId = user.currentUser;
+
+
+        if (args.userId == null || args.userId == CurrentUserId) {
+
+        } else {
+            ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    binding.player = it;
+                }
+
+            }
+            ModuleContext.userViewModel.loadUserInfo(args.userId!!);
+        }
+
         binding.tabVs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 TODO("Not yet implemented")

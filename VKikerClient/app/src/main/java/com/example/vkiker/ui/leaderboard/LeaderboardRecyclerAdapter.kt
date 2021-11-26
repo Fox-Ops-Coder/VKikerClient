@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkiker.R
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo
@@ -21,10 +22,19 @@ class LeaderboardRecyclerAdapter(
         var number: TextView? = null
         var card: MaterialCardView? = null;
         var name: TextView? = null
+        var akvElo: TextView? = null
+        var battlesCount: TextView? = null
+        var winRate: TextView? = null
+        var cups: TextView? = null
 
         init {
+            number = itemView.findViewById(R.id.userNumber);
             name = itemView.findViewById(R.id.userNameShort);
             card = itemView.findViewById(R.id.shortUserCard);
+            akvElo = itemView.findViewById(R.id.Elo);
+            winRate = itemView.findViewById(R.id.WinRate);
+            battlesCount = itemView.findViewById(R.id.BattlesCount);
+            cups = itemView.findViewById(R.id.cups);
         }
     }
 
@@ -36,11 +46,15 @@ class LeaderboardRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val userId = shorUsers[position].user.ID
-        holder.name?.text = userId;
+        val user = shorUsers[position];
+        holder.number?.text = user.Number;
+        holder.name?.text = user.user.Name;
         holder.card?.setOnClickListener() {
-            goToUserCall(userId);
+            goToUserCall(user.user.ID);
         }
+        holder.akvElo?.text ="AkvELOn:" + user.ELO.toString();
+        holder.battlesCount?.text ="B: "+ user.Battles.toString();
+        holder.winRate?.text ="V: " + user.Wins.toString();
     }
 
     override fun getItemCount(): Int {

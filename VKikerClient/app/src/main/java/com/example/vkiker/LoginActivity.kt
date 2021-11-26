@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        val storageName = "LoginStorage"
+        val storageName = getString(R.string.loginStorageName)
         val mySharedPreferences = getSharedPreferences(storageName, Context.MODE_PRIVATE);
         val user = CurrentUser(mySharedPreferences);
         val userId = user.currentUser;

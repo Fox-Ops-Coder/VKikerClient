@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="player"
+            type="com.foxdev.vkikermodule.net.netobjects.UserInfo" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,13 +74,15 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.574"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.666">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UserName Test" />
+                        android:text="@{player.user.Name}" />
 
                     <TextView
                         android:layout_width="wrap_content"
