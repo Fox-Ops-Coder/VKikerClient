@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.foxdev.vkikermodule.net.ServerInterface;
 import com.foxdev.vkikermodule.net.VKikerServer;
 import com.google.gson.annotations.SerializedName;
@@ -19,7 +21,10 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -29,13 +34,30 @@ import retrofit2.http.GET;
 public class ExampleUnitTest {
 
     static final class TestClass {
+        @SerializedName("access")
+        public boolean access;
+
         @SerializedName("test")
         public int value;
+
+        @SerializedName("userId")
+        public int userId;
+    }
+
+    static final class UserAuthDTO {
+        @SerializedName("userName")
+        public String userName;
+
+        @SerializedName("fcmToken")
+        public String fcmToken;
     }
 
     interface TestInterface {
-        @GET("/test")
+        @GET("/test/access")
         Call<TestClass> testConnection();
+
+        @POST("/auth")
+        Call<TestClass> postUser(@Body UserAuthDTO userAuthDTO);
     }
 
     @Test
@@ -54,7 +76,34 @@ public class ExampleUnitTest {
         try {
             Response<TestClass> response = serverInterface.testConnection().execute();
 
-            Assert.assertTrue(response.body().value == 0);
+            Assert.assertTrue(response.body().access);
+        } catch (Exception err) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void postRandomUser() {
+        OkHttpClient okHttpClient = new OkHttpClient()
+                .newBuilder()
+                .build();
+
+        TestInterface serverInterface = new Retrofit.Builder()
+                .baseUrl("http://10.0.6.190:4000/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(TestInterface.class);
+
+        try {
+            UserAuthDTO userAuthDTO = new UserAuthDTO();
+            userAuthDTO.userName = "Anon";
+            userAuthDTO.fcmToken = "It's token";
+
+            Response<TestClass> response = serverInterface
+                    .postUser(userAuthDTO).execute();
+
+            Assert.assertTrue(response.body().access);
         } catch (Exception err) {
             Assert.fail();
         }
