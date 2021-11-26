@@ -9,6 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.vkiker.databinding.ActivityMainBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
+import android.content.SharedPreferences
+
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null;
@@ -16,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
 
         val host =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
