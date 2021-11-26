@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.foxdev.vkikermodule.objects.Lobby;
 import com.foxdev.vkikermodule.objects.ShortUser;
 import com.foxdev.vkikermodule.objects.User;
+import com.foxdev.vkikermodule.objects.UserAuthDTO;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -74,6 +76,27 @@ public final class VKikerServer {
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 //TODO Do something with error
+            }
+        });
+    }
+
+    public void registerUser(@NonNull UserAuthDTO userAuthDTO,
+                             @NonNull Consumer<UserAuthDTO.ServerResponseData> consumer) {
+        serverInterface.Register(userAuthDTO).enqueue(new Callback<UserAuthDTO.ServerResponseData>() {
+            @Override
+            public void onResponse(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                   @NonNull Response<UserAuthDTO.ServerResponseData> response) {
+                if (response.isSuccessful()) {
+                    consumer.accept(response.body());
+                } else {
+                    consumer.accept(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
             }
         });
     }
