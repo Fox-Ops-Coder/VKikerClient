@@ -9,11 +9,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.foxdev.vkikermodule.net.Endpoints;
 import com.foxdev.vkikermodule.net.ServerInterface;
 import com.foxdev.vkikermodule.net.VKikerServer;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.function.Consumer;
 
 import okhttp3.OkHttpClient;
@@ -44,6 +46,13 @@ public class ExampleUnitTest {
         public int userId;
     }
 
+    static final class LeaderboardClass {
+        @SerializedName("id")
+        public String userId;
+        @SerializedName("name")
+        public String id;
+    }
+
     static final class UserAuthDTO {
         @SerializedName("userName")
         public String userName;
@@ -58,6 +67,9 @@ public class ExampleUnitTest {
 
         @POST("/auth")
         Call<TestClass> postUser(@Body UserAuthDTO userAuthDTO);
+
+        @GET(Endpoints.LEADERBOARD_ENDPOINT)
+        Call<List<LeaderboardClass>> getLeaderboar();
     }
 
     @Test
@@ -107,5 +119,26 @@ public class ExampleUnitTest {
         } catch (Exception err) {
             Assert.fail();
         }
+    }
+
+    @Test
+    public void testLeaderboard() {
+        OkHttpClient okHttpClient = new OkHttpClient()
+                .newBuilder()
+                .build();
+
+        TestInterface serverInterface = new Retrofit.Builder()
+                .baseUrl("http://10.0.6.190:4000/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(TestInterface.class);
+
+        try {
+            serverInterface.getLeaderboar().execute();
+        } catch (Exception err) {
+            Assert.fail();
+        }
+
     }
 }
