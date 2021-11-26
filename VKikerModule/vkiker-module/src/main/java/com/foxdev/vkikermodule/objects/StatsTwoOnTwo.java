@@ -33,7 +33,9 @@ public final class StatsTwoOnTwo {
         WinsCount = WinsCountInAttack + WinsCountInDefence;
         LoseCount = BattleCount - WinsCount;
 
-        WinsPercentInAttack = (double)BattlesCountInAttack / (double)WinsCountInAttack;
-        WinsPercentInDefence = (double)BattlesCountInDefence / (double)WinsPercentInDefence;
+        if (BattleCount >= 10) {
+            WinsPercentInAttack = (double)BattlesCountInAttack / (double)WinsCountInAttack;
+            WinsPercentInDefence = (double)BattlesCountInDefence / (double)WinsPercentInDefence;
+        }
     }
 }

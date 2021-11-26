@@ -35,9 +35,12 @@ public final class StatsOneOnOne {
 
     public void ComputeFields() {
         DefeatsCount = BattlesCount - WinsCount;
-        WinsPresent = (double)BattlesCount / (double)WinsCount;
 
-        AverageGoalsScorePerMatch = (double)GoalsScoredCount / (double)BattlesCount;
-        AverageGoalsConcededPerMatch = (double)GoalsConcededCount / (double)BattlesCount;
+        if (BattlesCount >= 10) {
+            WinsPresent = (double)BattlesCount / (double)WinsCount;
+
+            AverageGoalsScorePerMatch = (double)GoalsScoredCount / (double)BattlesCount;
+            AverageGoalsConcededPerMatch = (double)GoalsConcededCount / (double)BattlesCount;
+        }
     }
 }
