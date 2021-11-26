@@ -16,7 +16,7 @@ public final class UserAuthDTO {
         @SerializedName("message")
         public String message;
 
-        @SerializedName("userId")
+        @SerializedName("id")
         public String userId;
     }
 }
