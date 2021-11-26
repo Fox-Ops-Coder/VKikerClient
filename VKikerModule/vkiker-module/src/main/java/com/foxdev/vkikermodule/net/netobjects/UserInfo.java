@@ -12,6 +12,6 @@ public final class UserInfo {
     @SerializedName("statsOneOnOne")
     public StatsOneOnOne statsOneOnOne;
 
-    @SerializedName("statsTwoOnTWo")
+    @SerializedName("statsTwoOnTwo")
     public StatsTwoOnTwo statsTwoOnTwo;
 }
