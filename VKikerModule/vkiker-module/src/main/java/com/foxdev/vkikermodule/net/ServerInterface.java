@@ -18,5 +18,5 @@ interface ServerInterface {
 
     @GET("/users?user=userId")
     @NonNull
-    Call<User> getUser(@Query("userId") final int userId);
+    Call<User> getUser(@NonNull @Query("userId") String userId);
 }
