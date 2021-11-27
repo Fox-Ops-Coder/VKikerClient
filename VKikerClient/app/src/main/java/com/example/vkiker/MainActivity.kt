@@ -1,5 +1,7 @@
 package com.example.vkiker
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vkiker.databinding.ActivityMainBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import android.content.SharedPreferences
+import androidx.core.app.NotificationCompat
 import com.example.vkiker.connection.BattleStates
 import com.foxdev.vkikermodule.current.CurrentUser
 import com.google.firebase.messaging.FirebaseMessaging
@@ -35,6 +38,13 @@ FirebaseMessaging.getInstance()
             action.userId = userId;
             host.findNavController().navigate(action);
         }
+
+        var chanel = (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(
+            NotificationChannel("com.vkikerchannel","VkikerChannel", NotificationManager.IMPORTANCE_DEFAULT)
+        )
+
+        val builder = NotificationCompat.Builder(this, "com.vkikerchannel")
+
 
         binding.Leaders.setOnClickListener {
             host.findNavController().navigate(R.id.action_global_leaderboardFragment);
