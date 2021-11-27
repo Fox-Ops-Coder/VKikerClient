@@ -7,7 +7,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.vkiker.MainActivity
 import com.example.vkiker.R
+import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.current.CurrentUser
+import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -71,7 +73,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val mySharedPreferences = getSharedPreferences(storageName, Context.MODE_PRIVATE);
         val user = CurrentUser(mySharedPreferences);
         val userId = user.currentUser;
-
+//        val dto = UserAuthDTO();
+//        dto.fcmToken = token;
+//        dto.userName = userId;
+//ModuleContext.vKikerServer.updateFCM()
 
     }
 }
