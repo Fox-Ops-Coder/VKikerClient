@@ -44,6 +44,9 @@ FirebaseMessaging.getInstance()
         if(openLobby){
             host.findNavController().navigate(R.id.battleFragment);
             BattleStates.BattleStates.postValue(BattleStates.WaitingBattleState);
+
+
+
         }
 
 
