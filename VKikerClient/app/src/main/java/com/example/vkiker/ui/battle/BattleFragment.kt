@@ -2,6 +2,7 @@ package com.example.vkiker.ui.battle
 
 import android.content.Context
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,7 @@ class BattleFragment : Fragment() {
                 }
                 BattleStates.OnBattleState -> {
                     HideALl();
+                    binding.chronometer.base = SystemClock.elapsedRealtime();
                     binding.chronometer.start();
                     binding.buttonStart.isEnabled = true;
                     binding.buttonStart.text = "Stop"

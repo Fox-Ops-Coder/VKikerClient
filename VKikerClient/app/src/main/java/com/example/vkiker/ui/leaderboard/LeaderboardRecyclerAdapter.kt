@@ -3,8 +3,10 @@ package com.example.vkiker.ui.leaderboard
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkiker.R
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo
@@ -26,6 +28,7 @@ class LeaderboardRecyclerAdapter(
         var battlesCount: TextView? = null
         var winRate: TextView? = null
         var cups: TextView? = null
+        var image: ImageView? = null
 
         init {
             number = itemView.findViewById(R.id.userNumber);
@@ -35,6 +38,7 @@ class LeaderboardRecyclerAdapter(
             winRate = itemView.findViewById(R.id.WinRate);
             battlesCount = itemView.findViewById(R.id.BattlesCount);
             cups = itemView.findViewById(R.id.cups);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -52,9 +56,19 @@ class LeaderboardRecyclerAdapter(
         holder.card?.setOnClickListener() {
             goToUserCall(user.user.ID);
         }
-        holder.akvElo?.text ="AkvELOn:" + user.ELO.toString();
-        holder.battlesCount?.text ="B: "+ user.Battles.toString();
-        holder.winRate?.text ="V: " + user.Wins.toString();
+        holder.akvElo?.text = "AkvELOn:" + user.ELO.toString();
+        holder.battlesCount?.text = "B: " + user.Battles.toString();
+        holder.winRate?.text = "V: " + user.Wins.toString();
+        val colorId = when (shorUsers[position].IntNumber) {
+            1 -> R.color.purple_1000;
+            2 -> R.color.golden;
+            3 -> R.color.silver;
+            4 -> R.color.bronze;
+            else -> R.color.dark_blue;
+        }
+        val color = ContextCompat.getColor(holder.itemView.context, colorId);
+        holder.card?.strokeColor = color;
+        holder.number?.setTextColor(color);
     }
 
     override fun getItemCount(): Int {

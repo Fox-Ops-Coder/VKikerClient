@@ -20,6 +20,7 @@ import com.foxdev.vkikermodule.current.CurrentUser
 import com.foxdev.vkikermodule.net.VKikerServer
 import com.foxdev.vkikermodule.net.netobjects.DuelInvitation
 import com.google.android.material.tabs.TabLayout
+import java.text.DecimalFormat
 import java.util.function.Consumer
 
 class PlayerFragment : Fragment() {
@@ -56,10 +57,17 @@ class PlayerFragment : Fragment() {
         }
         ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
+                for (info in ModuleContext.leaderboardViewModel.leaders.value!!) {
+                    if (info.user!!.ID == it.user!!.ID) {
+                        binding.userNumber.text = info.Number;
+                    }
+                }
+
                 binding.player = it;
                 binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toString()
                 binding.BattlesCount.text = "B: " + it.statsOneOnOne.BattlesCount;
-                binding.BattlesCount.text = "W: " + it.statsOneOnOne.WinsPresent + "%"
+                binding.WinRate.text =
+                    "W: " + DecimalFormat("#0.00").format(it.statsOneOnOne.WinsPresent) + "%"
             }
         }
         ModuleContext.userViewModel.loadUserInfo(args.userId!!);

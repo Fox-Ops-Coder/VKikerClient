@@ -32,11 +32,12 @@
             android:id="@+id/shortUserCard"
             android:layout_width="match_parent"
 
+
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="7dp"
             android:theme="@style/ShortUserCardStyle"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/PlayerStats"
@@ -74,17 +75,19 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.574"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.666">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{player.user.Name}" />
 
                     <TextView
+                        android:layout_gravity="center"
                         android:id="@+id/playerElo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -130,11 +133,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
+            android:backgroundTint="#990000"
             android:text="Challenge to a duel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:backgroundTint="#990000"
             app:layout_constraintTop_toBottomOf="@+id/shortUserCard" />
 
         <Button
@@ -173,6 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -205,6 +210,7 @@
 
                     <TextView
                         android:layout_gravity="right"
+                        android:maxLength="5"
                         android:text="@{Double.toString(player.statsOneOnOne.WinsPresent)}" />
                 </TableRow>
 

@@ -1,6 +1,7 @@
 package com.example.vkiker.ui.leaderboard
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,7 @@ class LeaderboardFragment : Fragment() {
                     LeaderboardRecyclerAdapter(it) { t -> GoToUser(t) };
             } else {
                 binding.shortUserRecycler.adapter =
-                    LeaderboardRecyclerAdapter(emptyList<LeaderInfo>()){t->GoToUser(t)};
+                    LeaderboardRecyclerAdapter(emptyList<LeaderInfo>()) { t -> GoToUser(t) };
             }
         })
         ModuleContext.vKikerServer.loadLeaderBoards();
@@ -59,6 +60,19 @@ class LeaderboardFragment : Fragment() {
 //        val host =
 //            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
 //        host.findNavController().navigate(R.id.action_global_battleFragment);
+        ModuleContext.vKikerServer.getLobby {
+            if (it.Access == false) {
+                binding.teamAPlayer1.text = it.firstPlayerA;
+                binding.teamAPlayer2.text = it.firstPlayerA;
+                binding.teamBPlayer1.text = it.firstPlayerB;
+                binding.teamBPlayer2.text = it.secondPlayerB;
+                binding.chronometer.base = SystemClock.elapsedRealtime() - it.duration;
+            }
+            else{
+                binding.MySkills.visibility = View.GONE;
+                binding.materialCardView.visibility = View.GONE;
+            }
+        }
 
         return binding.root;
     }
