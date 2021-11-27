@@ -9,11 +9,11 @@ public final class DuelInvitation {
     public String senderId;
 
     @NonNull
-    public String receiverId;
+    public String opponentId;
 
     public DuelInvitation() {
         senderId = "";
-        receiverId = "";
+        opponentId = "";
     }
 
     public class InvitationResponse {
