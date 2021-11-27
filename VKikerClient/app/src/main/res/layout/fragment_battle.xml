@@ -90,28 +90,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonStart">
 
             <Button
-                android:id="@+id/IWin"
-                android:layout_width="match_parent"
+                android:id="@+id/ILose"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="I lose!" />
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="I lose!"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/IWin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
+                android:id="@+id/IWin"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="I win!" />
-        </LinearLayout>
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="I win!"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ILose"
+                app:layout_constraintTop_toTopOf="parent" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
