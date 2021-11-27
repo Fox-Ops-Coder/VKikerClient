@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.databinding.DataBindingUtil
 import com.example.vkiker.R
 import com.example.vkiker.connection.BattleStates
@@ -13,6 +14,7 @@ import com.example.vkiker.databinding.FragmentBattleBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.current.CurrentUser
+import com.foxdev.vkikermodule.net.netobjects.BattleResults
 import kotlin.concurrent.timer
 
 
@@ -30,6 +32,7 @@ class BattleFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_battle, container, false);
         binding.lifecycleOwner = viewLifecycleOwner;
 
+        val battleRes = BattleResults();
         //
         BattleStates.BattleStates.observe(viewLifecycleOwner) {
             val storageName = getString(R.string.loginStorageName)
@@ -37,6 +40,7 @@ class BattleFragment : Fragment() {
                 requireActivity().getSharedPreferences(storageName, Context.MODE_PRIVATE);
             val user = CurrentUser(mySharedPreferences);
             val userId = user.currentUser;
+            battleRes.userId = userId!!;
             when (it) {
                 BattleStates.WaitingBattleState -> {
                     HideALl();
@@ -61,6 +65,42 @@ class BattleFragment : Fragment() {
                     HideALl();
                     binding.ILose.visibility = View.VISIBLE
                     binding.IWin.visibility = View.VISIBLE
+                    binding.ILose.setOnClickListener {
+                        battleRes.isWinner = false;
+                        binding.seekBar.visibility = View.VISIBLE
+                        binding.seekbarText.visibility = View.VISIBLE
+                        binding.buttonConfirm.visibility = View.VISIBLE;
+
+                    }
+                    binding.IWin.setOnClickListener {
+                        battleRes.isWinner = true;
+                        binding.seekBar.visibility = View.VISIBLE
+                        binding.seekbarText.visibility = View.VISIBLE
+                        binding.buttonConfirm.visibility = View.VISIBLE;
+                    }
+
+                    binding.seekBar.setOnSeekBarChangeListener(object :
+                        SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(
+                            seekBar: SeekBar?,
+                            progress: Int,
+                            fromUser: Boolean
+                        ) {
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                            binding.seekbarText.text = seekBar?.progress.toString();
+                            battleRes.goalsCount = seekBar?.progress!!;
+                        }
+
+                    });
+                    binding.buttonConfirm.setOnClickListener {
+                        ModuleContext.vKikerServer.sendResults(battleRes)
+                    }
+
                 }
             }
         }
@@ -73,6 +113,7 @@ class BattleFragment : Fragment() {
         binding.IWin.visibility = View.INVISIBLE
         binding.seekBar.visibility = View.INVISIBLE
         binding.seekbarText.visibility = View.INVISIBLE
+        binding.buttonConfirm.visibility = View.INVISIBLE;
         binding.buttonStart.isEnabled = false;
 
     }
