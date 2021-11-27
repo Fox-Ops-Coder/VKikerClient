@@ -21,19 +21,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TableRow>
+
+            <TableRow android:background="?attr/colorPrimaryVariant">
 
                 <Button
                     android:id="@+id/Leaders"
-                    android:text="Leaders" />
+                    android:background="?attr/colorPrimary"
+                    android:text="Leaders"
+                    android:textColor="?attr/colorPrimaryVariant" />
 
                 <Button
                     android:id="@+id/InviteAll"
-                    android:text="INVITE ALL" />
+                    android:layout_height="match_parent"
+                    android:backgroundTint="?attr/colorPrimaryVariant"
+                    android:text="INVITE ALL"  android:shadowRadius="0"/>
 
                 <Button
                     android:id="@+id/Me"
-                    android:text="Me" />
+                    android:background="?attr/colorPrimary"
+                    android:text="Me"
+                    android:textColor="?attr/colorPrimaryVariant" />
 
             </TableRow>
         </TableLayout>

@@ -59,7 +59,6 @@ class BattleFragment : Fragment() {
                     }
 
 
-
                 }
             }
 
@@ -70,8 +69,12 @@ class BattleFragment : Fragment() {
     }
 
     fun HideALl() {
-
+        binding.ILose.visibility = View.INVISIBLE
+        binding.IWin.visibility = View.INVISIBLE
+        binding.seekBar.visibility = View.INVISIBLE
+        binding.seekbarText.visibility = View.INVISIBLE
         binding.buttonStart.isEnabled = false;
+
     }
 
 

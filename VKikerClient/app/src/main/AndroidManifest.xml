@@ -32,6 +32,15 @@
             android:noHistory="true">
 
         </activity>
+
+        <receiver
+            android:name=".connection.MyBroadcastReciever"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.example.uniqueTag" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
