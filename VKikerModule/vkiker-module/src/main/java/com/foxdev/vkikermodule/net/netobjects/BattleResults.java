@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 public final class BattleResults {
     @NonNull
-    public String userId;
+    public String id;
 
-    public boolean isWinner;
+    public boolean winner;
 
-    public int goalsCount;
+    public int goals;
 
     public BattleResults() {
-        userId = "";
+        id = "";
     }
 }

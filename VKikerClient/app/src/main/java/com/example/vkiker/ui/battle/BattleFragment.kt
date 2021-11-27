@@ -41,7 +41,7 @@ class BattleFragment : Fragment() {
                 requireActivity().getSharedPreferences(storageName, Context.MODE_PRIVATE);
             val user = CurrentUser(mySharedPreferences);
             val userId = user.currentUser;
-            battleRes.userId = userId!!;
+            battleRes.id = userId!!;
             when (it) {
                 BattleStates.WaitingBattleState -> {
                     HideALl();
@@ -68,14 +68,14 @@ class BattleFragment : Fragment() {
                     binding.ILose.visibility = View.VISIBLE
                     binding.IWin.visibility = View.VISIBLE
                     binding.ILose.setOnClickListener {
-                        battleRes.isWinner = false;
+                        battleRes.winner = false;
                         binding.seekBar.visibility = View.VISIBLE
                         binding.seekbarText.visibility = View.VISIBLE
                         binding.buttonConfirm.visibility = View.VISIBLE;
 
                     }
                     binding.IWin.setOnClickListener {
-                        battleRes.isWinner = true;
+                        battleRes.winner = true;
                         binding.seekBar.visibility = View.VISIBLE
                         binding.seekbarText.visibility = View.VISIBLE
                         binding.buttonConfirm.visibility = View.VISIBLE;
@@ -95,7 +95,7 @@ class BattleFragment : Fragment() {
 
                         override fun onStopTrackingTouch(seekBar: SeekBar?) {
                             binding.seekbarText.text = seekBar?.progress.toString();
-                            battleRes.goalsCount = seekBar?.progress!!;
+                            battleRes.goals = seekBar?.progress!!;
                         }
 
                     });
