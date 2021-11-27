@@ -25,7 +25,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class VKikerServer {
-    private final static String serverUrl = "http://10.0.9.70:4000";
+    private final static String serverUrl = "http://10.0.6.190:4000";
 
     @NonNull
     private final ServerInterface serverInterface;
