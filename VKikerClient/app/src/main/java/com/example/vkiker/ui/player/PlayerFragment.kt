@@ -9,12 +9,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vkiker.R
+import com.example.vkiker.connection.BattleStates
 import com.example.vkiker.databinding.PlayerFragmentBinding
 import com.foxdev.vkikermodule.context.ModuleContext
 import com.foxdev.vkikermodule.current.CurrentUser
+import com.foxdev.vkikermodule.net.VKikerServer
+import com.foxdev.vkikermodule.net.netobjects.DuelInvitation
 import com.google.android.material.tabs.TabLayout
+import java.util.function.Consumer
 
 class PlayerFragment : Fragment() {
 
@@ -43,9 +49,10 @@ class PlayerFragment : Fragment() {
         val user = CurrentUser(mySharedPreferences);
         val CurrentUserId = user.currentUser;
 
-
         if (args.userId == null || args.userId == CurrentUserId) {
 
+            binding.challengeToDuel.visibility = View.GONE;
+            binding.ChallengeToSimpleBattle.visibility = View.GONE;
         } else {
             ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
@@ -60,12 +67,11 @@ class PlayerFragment : Fragment() {
 
         binding.tabVs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab!=null){
-                    if(tab.position==0){
+                if (tab != null) {
+                    if (tab.position == 0) {
                         binding.TwoVsTwoCard.visibility = View.INVISIBLE;
                         binding.oneVsOneCard.visibility = View.VISIBLE;
-                    }
-                    else{
+                    } else {
                         binding.TwoVsTwoCard.visibility = View.VISIBLE;
                         binding.oneVsOneCard.visibility = View.INVISIBLE;
                     }
@@ -77,6 +83,22 @@ class PlayerFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         });
+
+
+        binding.challengeToDuel.setOnClickListener {
+            val duelInv = DuelInvitation();
+            duelInv.senderId = CurrentUserId!!;
+            duelInv.receiverId = args.userId!!;
+            ModuleContext.vKikerServer.inviteToDuel(duelInv) {
+                if (it?.Access == true) {
+                    val activity = requireActivity();
+                    val host =
+                        activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
+                    BattleStates.BattleStates.postValue(BattleStates.WaitingOpponentState)
+                    host.findNavController().navigate(R.id.action_global_battleFragment);
+                }
+            }
+        }
         return binding.root;
     }
 

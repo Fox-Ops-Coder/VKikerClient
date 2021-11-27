@@ -125,6 +125,29 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <Button
+            android:id="@+id/challengeToDuel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Challenge to a duel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="#990000"
+            app:layout_constraintTop_toBottomOf="@+id/shortUserCard" />
+
+        <Button
+            android:id="@+id/ChallengeToSimpleBattle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Challenge to a simple battle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/challengeToDuel" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabVs"
             android:layout_width="match_parent"
@@ -132,7 +155,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shortUserCard">
+            app:layout_constraintTop_toBottomOf="@+id/ChallengeToSimpleBattle">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -181,7 +204,6 @@
                         android:text="Percent of wins" />
 
                     <TextView
-
                         android:layout_gravity="right"
                         android:text="@{Double.toString(player.statsOneOnOne.WinsPresent)}" />
                 </TableRow>
@@ -250,11 +272,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabVs"
             app:strokeColor="?attr/colorPrimary"
-            android:visibility="invisible"
             app:strokeWidth="1dp">
 
             <TableLayout

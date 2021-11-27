@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent);
         } else {
-            binding.buttonLogin.setOnClickListener {
+            binding.buttonRegister.setOnClickListener {
                 FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
 
@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
                 });
 
             }
+
+
 
         }
 
