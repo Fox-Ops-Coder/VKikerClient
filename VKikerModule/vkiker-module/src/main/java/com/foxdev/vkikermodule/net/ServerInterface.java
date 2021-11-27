@@ -35,11 +35,11 @@ public interface ServerInterface {
     @NonNull
     Call<UserAuthDTO.ServerResponseData> Login(@NonNull @Path("userName") String userName);
 
-    @GET(Endpoints.DUEL_INVITATION)
+    @POST(Endpoints.DUEL_INVITATION)
     @NonNull
     Call<DuelInvitation.InvitationResponse> InviteToDuel(@NonNull @Body DuelInvitation duelInvitations);
 
-    @GET(Endpoints.DUEL_ACCEPT)
+    @POST(Endpoints.DUEL_ACCEPT)
     @NonNull
     Call<DuelInvitation.InvitationResponse> AcceptDuel(@Nullable @Body DuelInvitation duelInvitation);
 
