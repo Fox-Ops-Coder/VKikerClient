@@ -32,37 +32,37 @@ class BattleFragment : Fragment() {
 
         //
         BattleStates.BattleStates.observe(viewLifecycleOwner) {
+            val storageName = getString(R.string.loginStorageName)
+            val mySharedPreferences =
+                requireActivity().getSharedPreferences(storageName, Context.MODE_PRIVATE);
+            val user = CurrentUser(mySharedPreferences);
+            val userId = user.currentUser;
             when (it) {
                 BattleStates.WaitingBattleState -> {
                     HideALl();
                     binding.buttonStart.isEnabled = true;
                     binding.buttonStart.setOnClickListener {
-                        val storageName = getString(R.string.loginStorageName)
-                        val mySharedPreferences = requireActivity().getSharedPreferences(
-                            storageName,
-                            Context.MODE_PRIVATE
-                        );
-                        val user = CurrentUser(mySharedPreferences);
-                        val userId = user.currentUser;
                         ModuleContext.vKikerServer.readyForBattle(userId!!) {
-
                         }
                     }
                 }
                 BattleStates.OnBattleState -> {
+                    HideALl();
                     binding.chronometer.start();
                     binding.buttonStart.isEnabled = true;
                     binding.buttonStart.text = "Stop"
                     binding.buttonStart.setOnClickListener {
-
-
+                        binding.chronometer.stop();
+                        ModuleContext.vKikerServer.stopBattle(userId!!) { }
+                        BattleStates.BattleStates.postValue(BattleStates.OnBattleEndedState)
                     }
-
-
+                }
+                BattleStates.OnBattleEndedState -> {
+                    HideALl();
+                    binding.ILose.visibility = View.VISIBLE
+                    binding.IWin.visibility = View.VISIBLE
                 }
             }
-
-
         }
 
         return binding.root;

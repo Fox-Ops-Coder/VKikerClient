@@ -8,6 +8,7 @@ class BattleStates {
         val WaitingOpponentState = "WaitingOpponent"
         val WaitingBattleState = "WaitingBattle"
         val OnBattleState = "OnBattle"
+        val OnBattleEndedState = "OnBattleEnded"
 
         var BattleStates = MutableLiveData<String>(NoBattleState)
 
