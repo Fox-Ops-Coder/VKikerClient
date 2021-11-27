@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.foxdev.vkikermodule.net.netobjects.BattleResults;
 import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
+import com.foxdev.vkikermodule.net.netobjects.LobbyResponse;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
 import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 
@@ -197,6 +198,24 @@ public final class VKikerServer {
             @Override
             public void onFailure(@NonNull Call<UserAuthDTO.ServerResponseData> call,
                                   @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
+    public void getLobby(@NonNull Consumer<LobbyResponse> consumer) {
+        serverInterface.GetLobby().enqueue(new Callback<LobbyResponse>() {
+            @Override
+            public void onResponse(Call<LobbyResponse> call, Response<LobbyResponse> response) {
+                if (response.isSuccessful()) {
+                    consumer.accept(response.body());
+                } else {
+                    consumer.accept(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LobbyResponse> call, Throwable t) {
                 consumer.accept(null);
             }
         });

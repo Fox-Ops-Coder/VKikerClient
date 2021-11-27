@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import com.foxdev.vkikermodule.net.netobjects.BattleResults;
 import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
+import com.foxdev.vkikermodule.net.netobjects.LobbyResponse;
 import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
 
@@ -43,6 +44,10 @@ public interface ServerInterface {
     @POST(Endpoints.DUEL_ACCEPT)
     @NonNull
     Call<DuelInvitation.InvitationResponse> AcceptDuel(@Nullable @Body DuelInvitation duelInvitation);
+
+    @GET(Endpoints.LOBBY)
+    @NonNull
+    Call<LobbyResponse> GetLobby();
 
     @GET(Endpoints.BATTLE_READY)
     @NonNull
