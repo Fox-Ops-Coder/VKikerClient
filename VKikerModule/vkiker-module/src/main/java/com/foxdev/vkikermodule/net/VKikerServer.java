@@ -87,6 +87,65 @@ public final class VKikerServer {
         });
     }
 
+    public void acceptDuel(@NonNull DuelInvitation duelInvitation,
+                           @NonNull Consumer<DuelInvitation.InvitationResponse> consumer) {
+        serverInterface.AcceptDuel(duelInvitation).enqueue(new Callback<DuelInvitation.InvitationResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DuelInvitation.InvitationResponse> call,
+                                   @NonNull Response<DuelInvitation.InvitationResponse> response) {
+                if (response.isSuccessful()) {
+                    consumer.accept(response.body());
+                } else {
+                    consumer.accept(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DuelInvitation.InvitationResponse> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
+    public void readyForBattle(@NonNull String userId,
+                               @NonNull Consumer<Void> consumer) {
+        serverInterface.ReadyForBattle(userId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call,
+                                   @NonNull Response<Void> response) {
+                consumer.accept(null);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
+    public void login(@NonNull String userName,
+                      @NonNull Consumer<UserAuthDTO.ServerResponseData> consumer) {
+        serverInterface.Login(userName).enqueue(new Callback<UserAuthDTO.ServerResponseData>() {
+            @Override
+            public void onResponse(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                   @NonNull Response<UserAuthDTO.ServerResponseData> response) {
+                if (response.isSuccessful()) {
+                    consumer.accept(response.body());
+                } else {
+                    consumer.accept(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
     public void getUser(@NonNull String userId) {
         serverInterface.getUser(userId).enqueue(new Callback<UserInfo>() {
             @Override
