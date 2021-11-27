@@ -9,10 +9,13 @@ import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
 import com.foxdev.vkikermodule.net.netobjects.UserInfo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.function.Consumer;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,8 +33,12 @@ public final class VKikerServer {
     private final MutableLiveData<UserInfo> userLiveData;
 
     public VKikerServer() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient okHttpClient = new OkHttpClient()
                 .newBuilder()
+                .addInterceptor(interceptor)
                 .build();
 
         serverInterface = new Retrofit.Builder()
@@ -125,6 +132,23 @@ public final class VKikerServer {
         });
     }
 
+    public void stopBattle(@NotNull String userId,
+                           @NonNull Consumer<Void> consumer) {
+        serverInterface.StopBattle(userId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call,
+                                   @NonNull Response<Void> response) {
+                consumer.accept(null);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call,
+                                  @NonNull Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
     public void login(@NonNull String userName,
                       @NonNull Consumer<UserAuthDTO.ServerResponseData> consumer) {
         serverInterface.Login(userName).enqueue(new Callback<UserAuthDTO.ServerResponseData>() {
@@ -150,12 +174,14 @@ public final class VKikerServer {
                           @NonNull Consumer<UserAuthDTO.ServerResponseData> consumer) {
         serverInterface.UpdateFCM(userAuthDTO).enqueue(new Callback<UserAuthDTO.ServerResponseData>() {
             @Override
-            public void onResponse(Call<UserAuthDTO.ServerResponseData> call, Response<UserAuthDTO.ServerResponseData> response) {
+            public void onResponse(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                   @NonNull Response<UserAuthDTO.ServerResponseData> response) {
                 consumer.accept(response.body());
             }
 
             @Override
-            public void onFailure(Call<UserAuthDTO.ServerResponseData> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserAuthDTO.ServerResponseData> call,
+                                  @NonNull Throwable t) {
                 consumer.accept(null);
             }
         });
