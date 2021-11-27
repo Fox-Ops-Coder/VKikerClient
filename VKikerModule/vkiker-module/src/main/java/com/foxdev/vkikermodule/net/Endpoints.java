@@ -10,4 +10,5 @@ public final class Endpoints {
     public static final String DUEL_ACCEPT = "/battle/accept";
     public static final String BATTLE_READY = "/battle/ready/{userId}";
     public static final String STOP_BATTLE = "/battle/stop/{userId}";
+    public static final String SEND_BATTLE_RESULTS = "/battle/result";
 }
