@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vkiker.databinding.ActivityMainBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
 import android.content.SharedPreferences
+import com.example.vkiker.connection.BattleStates
 import com.foxdev.vkikermodule.current.CurrentUser
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -37,6 +38,12 @@ FirebaseMessaging.getInstance()
 
         binding.Leaders.setOnClickListener {
             host.findNavController().navigate(R.id.action_global_leaderboardFragment);
+        }
+
+        val openLobby =intent.getBooleanExtra("OpenLobby", false);
+        if(openLobby){
+            host.findNavController().navigate(R.id.battleFragment);
+            BattleStates.BattleStates.postValue(BattleStates.WaitingBattleState);
         }
 
 

@@ -11,9 +11,7 @@ class BattleStates {
 
         var BattleStates = MutableLiveData<String>(NoBattleState)
 
-        val DuelInvite = ""
-        val DuelInviteMessage= ""
-        val DuelAccepted = ""
+
     }
 
 }

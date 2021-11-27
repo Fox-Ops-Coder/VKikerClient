@@ -1,5 +1,6 @@
 package com.example.vkiker.ui.battle
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import com.example.vkiker.R
 import com.example.vkiker.connection.BattleStates
 import com.example.vkiker.databinding.FragmentBattleBinding
 import com.example.vkiker.databinding.LeaderboardFragmentBinding
+import com.foxdev.vkikermodule.context.ModuleContext
+import com.foxdev.vkikermodule.current.CurrentUser
 import kotlin.concurrent.timer
 
 
@@ -30,18 +33,32 @@ class BattleFragment : Fragment() {
         //
         BattleStates.BattleStates.observe(viewLifecycleOwner) {
             when (it) {
-                BattleStates.NoBattleState -> {
-
-                }
-                BattleStates.WaitingOpponentState -> {
-                    HideALl();
-                    binding.textPleaseWaiting.visibility = View.VISIBLE;
-                }
                 BattleStates.WaitingBattleState -> {
                     HideALl();
                     binding.buttonStart.isEnabled = true;
+                    binding.buttonStart.setOnClickListener {
+                        val storageName = getString(R.string.loginStorageName)
+                        val mySharedPreferences = requireActivity().getSharedPreferences(
+                            storageName,
+                            Context.MODE_PRIVATE
+                        );
+                        val user = CurrentUser(mySharedPreferences);
+                        val userId = user.currentUser;
+                        ModuleContext.vKikerServer.readyForBattle(userId!!) {
+
+                        }
+                    }
                 }
-                BattleStates.OnBattleState->{
+                BattleStates.OnBattleState -> {
+                    binding.chronometer.start();
+                    binding.buttonStart.isEnabled = true;
+                    binding.buttonStart.text = "Stop"
+                    binding.buttonStart.setOnClickListener {
+
+
+                    }
+
+
 
                 }
             }
@@ -53,7 +70,7 @@ class BattleFragment : Fragment() {
     }
 
     fun HideALl() {
-        binding.textPleaseWaiting.visibility = View.INVISIBLE;
+
         binding.buttonStart.isEnabled = false;
     }
 

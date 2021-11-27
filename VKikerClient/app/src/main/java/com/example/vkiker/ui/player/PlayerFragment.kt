@@ -91,11 +91,11 @@ class PlayerFragment : Fragment() {
             duelInv.receiverId = args.userId!!;
             ModuleContext.vKikerServer.inviteToDuel(duelInv) {
                 if (it?.Access == true) {
-                    val activity = requireActivity();
-                    val host =
-                        activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
-                    BattleStates.BattleStates.postValue(BattleStates.WaitingOpponentState)
-                    host.findNavController().navigate(R.id.action_global_battleFragment);
+//                    val activity = requireActivity();
+//                    val host =
+//                        activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
+//                    BattleStates.BattleStates.postValue(BattleStates.WaitingOpponentState)
+//                    host.findNavController().navigate(R.id.action_global_battleFragment);
                 }
             }
         }

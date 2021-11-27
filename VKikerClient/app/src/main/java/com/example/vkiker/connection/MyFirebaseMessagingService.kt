@@ -15,17 +15,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
         if (remoteMessage.data.isNotEmpty()) {
             val data = remoteMessage.data;
-            if (data.containsKey(BattleStates.DuelInvite)) {
-                val message = data[BattleStates.DuelInviteMessage];
+            if (data.containsKey("duelWithId")) {
+                val opponentId = data["duelWithId"];
+                val message = data["duelWithName"] + " invited you to a duel";
                 val intent = Intent(this, MainActivity::class.java)
 
                 val peningIntent =
                     PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-
                 val builder = NotificationCompat.Builder(this, "fads")
                     .setSmallIcon(R.drawable.ic_baseline_check_24)
-                    .setContentTitle("You was accepted to a duel!")
+                    .setContentTitle("This is duel!")
                     .setContentText(message)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
@@ -35,9 +35,25 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     notify(101, builder.build());
                 }
 
-            }
-            else if(data.containsKey(BattleStates.DuelAccepted)){
+            } else if (data.containsKey("goLobby")) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("OpenLobby", true);
+                val peningIntent =
+                    PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                val builder = NotificationCompat.Builder(this, "fads")
+                    .setSmallIcon(R.drawable.ic_baseline_check_24)
+                    .setContentTitle("Game is ready")
+                    .setContentText("Your opponent has accepted your challenge")
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setAutoCancel(true)
+                    .setContentIntent(peningIntent);
                 BattleStates.BattleStates.postValue(BattleStates.WaitingBattleState);
+                with(NotificationManagerCompat.from(this)) {
+                    notify(102, builder.build());
+                }
+            } else if (data.containsKey("start")) {
+                BattleStates.BattleStates.postValue(BattleStates.OnBattleState);
             }
 
 

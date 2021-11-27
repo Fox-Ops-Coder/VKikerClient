@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                         dto.userName = userName;
 
                         ModuleContext.vKikerServer.registerUser(dto) {
-                            if (it!=null && it!!.access ) {
+                            if (it != null && it!!.access) {
                                 user.setCurrentUser(it.userId);
                             } else {
                                 Log.d("Debug", "user not registered")
@@ -59,7 +59,6 @@ class LoginActivity : AppCompatActivity() {
                 });
 
             }
-
 
 
         }
