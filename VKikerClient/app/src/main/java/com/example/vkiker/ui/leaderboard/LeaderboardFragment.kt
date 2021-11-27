@@ -61,7 +61,7 @@ class LeaderboardFragment : Fragment() {
 //            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
 //        host.findNavController().navigate(R.id.action_global_battleFragment);
         ModuleContext.vKikerServer.getLobby {
-            if (it.Access) {
+            if (!it.Access) {
                 binding.teamAPlayer1.text = it.firstPlayerA;
                 binding.teamAPlayer2.text = it.firstPlayerA;
                 binding.teamBPlayer1.text = it.firstPlayerB;
