@@ -53,17 +53,17 @@ class PlayerFragment : Fragment() {
 
             binding.challengeToDuel.visibility = View.GONE;
             binding.ChallengeToSimpleBattle.visibility = View.GONE;
-        } else {
-            ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    binding.player = it;
-                    binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toString()
-                    binding.BattlesCount.text = "B: " + it.statsOneOnOne.BattlesCount;
-                    binding.BattlesCount.text = "W: " + it.statsOneOnOne.WinsPresent + "%"
-                }
-            }
-            ModuleContext.userViewModel.loadUserInfo(args.userId!!);
         }
+        ModuleContext.userViewModel.userLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.player = it;
+                binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toString()
+                binding.BattlesCount.text = "B: " + it.statsOneOnOne.BattlesCount;
+                binding.BattlesCount.text = "W: " + it.statsOneOnOne.WinsPresent + "%"
+            }
+        }
+        ModuleContext.userViewModel.loadUserInfo(args.userId!!);
+
 
         binding.tabVs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
