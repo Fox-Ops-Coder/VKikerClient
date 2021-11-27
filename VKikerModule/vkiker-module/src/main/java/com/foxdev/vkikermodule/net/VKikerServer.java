@@ -146,6 +146,21 @@ public final class VKikerServer {
         });
     }
 
+    public void updateFCM(@NonNull UserAuthDTO userAuthDTO,
+                          @NonNull Consumer<UserAuthDTO.ServerResponseData> consumer) {
+        serverInterface.UpdateFCM(userAuthDTO).enqueue(new Callback<UserAuthDTO.ServerResponseData>() {
+            @Override
+            public void onResponse(Call<UserAuthDTO.ServerResponseData> call, Response<UserAuthDTO.ServerResponseData> response) {
+                consumer.accept(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthDTO.ServerResponseData> call, Throwable t) {
+                consumer.accept(null);
+            }
+        });
+    }
+
     public void getUser(@NonNull String userId) {
         serverInterface.getUser(userId).enqueue(new Callback<UserInfo>() {
             @Override

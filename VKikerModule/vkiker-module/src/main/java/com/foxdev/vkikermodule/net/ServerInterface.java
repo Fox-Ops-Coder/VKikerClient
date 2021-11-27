@@ -46,4 +46,8 @@ public interface ServerInterface {
     @GET(Endpoints.BATTLE_READY)
     @NonNull
     Call<Void> ReadyForBattle(@NotNull @Path("userId") String userId);
+
+    @POST(Endpoints.UPDATE_FCM)
+    @NonNull
+    Call<UserAuthDTO.ServerResponseData> UpdateFCM(@Body UserAuthDTO userAuthDTO);
 }
