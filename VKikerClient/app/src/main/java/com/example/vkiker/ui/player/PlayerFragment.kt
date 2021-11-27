@@ -88,7 +88,7 @@ class PlayerFragment : Fragment() {
         binding.challengeToDuel.setOnClickListener {
             val duelInv = DuelInvitation();
             duelInv.senderId = CurrentUserId!!;
-            duelInv.receiverId = args.userId!!;
+            duelInv.opponentId = args.userId!!;
             ModuleContext.vKikerServer.inviteToDuel(duelInv) {
                 if (it?.Access == true) {
 //                    val activity = requireActivity();

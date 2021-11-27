@@ -43,6 +43,8 @@ class LoginActivity : AppCompatActivity() {
                         ModuleContext.vKikerServer.registerUser(dto) {
                             if (it != null && it!!.access) {
                                 user.setCurrentUser(it.userId);
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent);
                             } else {
                                 Log.d("Debug", "user not registered")
                             }
@@ -58,6 +60,35 @@ class LoginActivity : AppCompatActivity() {
                     }
                 });
 
+            }
+
+            binding.buttonLogin.setOnClickListener() {
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
+                    if (it.isSuccessful) {
+
+                        var userName = binding.editTextTextPersonName.text.toString();
+
+                        val dto = UserAuthDTO();
+                        dto.fcmToken = it.result;
+                        dto.userName = userName;
+
+                        ModuleContext.vKikerServer.login(userName) {
+                            if (it != null && it!!.access) {
+                                user.setCurrentUser(it.userId);
+                            } else {
+                                Log.d("Debug", "user not logged")
+                            }
+                        }
+                        val token = it.result
+                        Log.d(ContentValues.TAG, "Token= $token");
+                    } else {
+                        Log.w(
+                            ContentValues.TAG,
+                            "Fetching FCM registration token failed",
+                            it.exception
+                        )
+                    }
+                });
             }
 
 
