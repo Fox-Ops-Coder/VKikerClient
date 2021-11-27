@@ -251,7 +251,7 @@ public final class VKikerServer {
                         });
 
                         for (int index = 0; index < leaderInfos.size(); ++index) {
-                            leaderInfos.get(index).Number = "#" + index + 1;
+                            leaderInfos.get(index).Number = "#" + (index + 1);
                             leaderInfos.get(index).IntNumber = index + 1;
                         }
 

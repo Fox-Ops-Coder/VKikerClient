@@ -37,7 +37,7 @@ public final class StatsOneOnOne {
         DefeatsCount = BattlesCount - WinsCount;
 
         if (BattlesCount >= 10) {
-            WinsPresent = ((double)BattlesCount / (double)WinsCount) * 100.0;
+            WinsPresent = ((double)WinsCount / (double)BattlesCount) * 100.0;
 
             AverageGoalsScorePerMatch = (double)GoalsScoredCount / (double)BattlesCount;
             AverageGoalsConcededPerMatch = (double)GoalsConcededCount / (double)BattlesCount;
