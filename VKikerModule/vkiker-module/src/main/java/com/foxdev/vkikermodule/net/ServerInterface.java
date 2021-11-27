@@ -3,6 +3,7 @@ package com.foxdev.vkikermodule.net;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.foxdev.vkikermodule.net.netobjects.BattleResults;
 import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserInfo;
@@ -50,6 +51,10 @@ public interface ServerInterface {
     @GET(Endpoints.STOP_BATTLE)
     @NonNull
     Call<Void> StopBattle(@NonNull @Path("userId") String userId);
+
+    @POST(Endpoints.SEND_BATTLE_RESULTS)
+    @NonNull
+    Call<Void> SendBattleResults(@NonNull @Body BattleResults battleResults);
 
     @POST(Endpoints.UPDATE_FCM)
     @NonNull

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.foxdev.vkikermodule.net.netobjects.BattleResults;
 import com.foxdev.vkikermodule.net.netobjects.DuelInvitation;
 import com.foxdev.vkikermodule.net.netobjects.LeaderInfo;
 import com.foxdev.vkikermodule.net.netobjects.UserAuthDTO;
@@ -145,6 +146,20 @@ public final class VKikerServer {
             public void onFailure(@NonNull Call<Void> call,
                                   @NonNull Throwable t) {
                 consumer.accept(null);
+            }
+        });
+    }
+
+    public void sendResults(@NonNull BattleResults battleResults) {
+        serverInterface.SendBattleResults(battleResults).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+
             }
         });
     }
