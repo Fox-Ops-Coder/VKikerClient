@@ -10,7 +10,7 @@ public final class LeaderInfo {
     public User user;
 
     @SerializedName("elo")
-    public double ELO;
+    public int ELO;
 
     @SerializedName("battles")
     public int Battles;
