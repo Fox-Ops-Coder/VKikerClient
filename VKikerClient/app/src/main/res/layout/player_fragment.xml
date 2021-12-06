@@ -80,17 +80,17 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_gravity="center"
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{player.user.Name}" />
+                        android:layout_gravity="center"
+                        android:text="@{player.user.Name}"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_gravity="center"
                         android:id="@+id/playerElo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="ELO:load" />
 
 
@@ -128,18 +128,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/challengeToDuel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:backgroundTint="#990000"
+            android:backgroundTint="@color/white"
             android:text="Challenge to a duel"
+            android:textColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shortUserCard" />
+            app:layout_constraintTop_toBottomOf="@+id/shortUserCard"
+            app:strokeColor="@color/red"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/ChallengeToSimpleBattle"
@@ -147,10 +150,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:backgroundTint="@color/white"
             android:text="Challenge to a simple battle"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/challengeToDuel" />
+            app:layout_constraintTop_toBottomOf="@+id/challengeToDuel"
+            app:strokeColor="?attr/colorPrimary"
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabVs"

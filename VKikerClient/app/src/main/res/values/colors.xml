@@ -13,4 +13,6 @@
     <color name="silver">#E5E5E5</color>
     <color name="bronze">#DE8B3F</color>
     <color name="purple_1000">#BD00FF</color>
+    <color name="red">#990000</color>
+    <color name="green">#00FF0A</color>
 </resources>
