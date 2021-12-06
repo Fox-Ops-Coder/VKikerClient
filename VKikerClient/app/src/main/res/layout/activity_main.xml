@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
 
-            <TableRow android:background="?attr/colorPrimaryVariant">
+            <TableRow>
 
                 <Button
                     android:id="@+id/Leaders"
@@ -30,11 +30,15 @@
                     android:text="Leaders"
                     android:textColor="?attr/colorPrimaryVariant" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/InviteAll"
                     android:layout_height="match_parent"
                     android:backgroundTint="?attr/colorPrimaryVariant"
-                    android:text="INVITE ALL"  android:shadowRadius="0"/>
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:shadowRadius="0"
+                    android:text="INVITE ALL"
+                    app:cornerRadius="0dp" />
 
                 <Button
                     android:id="@+id/Me"
@@ -56,5 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_graph" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
