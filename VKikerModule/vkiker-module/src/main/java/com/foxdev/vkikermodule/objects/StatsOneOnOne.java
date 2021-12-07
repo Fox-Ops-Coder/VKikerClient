@@ -19,9 +19,9 @@ public final class StatsOneOnOne {
     public int GoalsConcededCount;
 
     @SerializedName("averageWinDuration")
-    public long AverageWinDuration;
+    public double AverageWinDuration;
     @SerializedName("averageLoseDuration")
-    public long AverageLoseDuration;
+    public double AverageLoseDuration;
 
     @SerializedName("averageGoalsConcededInWin")
     public double AverageGoalsConcededInWin;
@@ -31,7 +31,7 @@ public final class StatsOneOnOne {
     public int DefeatsCount;
 
     public double WinsPresent;
-    public String WinsPresentString  = "too few battles";
+    public String WinsPresentString  = "expect 10 battles";
     public double AverageGoalsScorePerMatch;
     public double AverageGoalsConcededPerMatch;
 
