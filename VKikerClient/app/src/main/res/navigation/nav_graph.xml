@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/leaderboardFragment">
+
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.example.vkiker.ui.leaderboard.LeaderboardFragment"
+        android:label="leaderboard_fragment"
+        tools:layout="@layout/leaderboard_fragment" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.vkiker.ui.player.PlayerFragment"
+        android:label="player_fragment"
+        tools:layout="@layout/player_fragment">
+        <argument
+            android:name="UserId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_playerFragment"
+        app:destination="@id/playerFragment"
+        app:popUpTo="@id/playerFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_leaderboardFragment"
+        app:destination="@id/leaderboardFragment"
+        app:popUpTo="@id/leaderboardFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/lobbyFragment"
+        android:name="com.example.vkiker.ui.lobby.LobbyFragment"
+        android:label="lobby_fragment"
+        tools:layout="@layout/lobby_fragment" />
+    <action
+        android:id="@+id/action_global_lobbyFragment"
+        app:destination="@id/lobbyFragment"
+        app:popUpTo="@id/lobbyFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/battleFragment"
+        android:name="com.example.vkiker.ui.battle.BattleFragment"
+        android:label="fragment_battle"
+        tools:layout="@layout/fragment_battle"/>
+    <action
+        android:id="@+id/action_global_battleFragment"
+        app:destination="@id/battleFragment"
+        app:popUpTo="@id/battleFragment"
+        app:popUpToInclusive="true" />
+</navigation>

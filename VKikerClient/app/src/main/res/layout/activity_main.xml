@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TableLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/Leaders"
+                    android:background="?attr/colorPrimary"
+                    android:text="Leaders"
+                    android:textColor="?attr/colorPrimaryVariant" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/InviteAll"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="?attr/colorPrimaryVariant"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:shadowRadius="0"
+                    android:text="INVITE ALL"
+                    app:cornerRadius="0dp" />
+
+                <Button
+                    android:id="@+id/Me"
+                    android:background="?attr/colorPrimary"
+                    android:text="Me"
+                    android:textColor="?attr/colorPrimaryVariant" />
+
+            </TableRow>
+        </TableLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomPanel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_graph" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

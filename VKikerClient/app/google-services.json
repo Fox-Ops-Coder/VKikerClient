@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814213814682",
+    "project_id": "vkiker-6c86d",
+    "storage_bucket": "vkiker-6c86d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814213814682:android:2f8196a625c17ada69c223",
+        "android_client_info": {
+          "package_name": "com.example.vkiker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814213814682-udmp0crajd9avd818qpav31b09j0jt67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJXu2OHsY_-nu0Q24bEjM7qsYcJV31kjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814213814682-udmp0crajd9avd818qpav31b09j0jt67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
