@@ -64,10 +64,12 @@ class PlayerFragment : Fragment() {
                 }
 
                 binding.player = it;
-                binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toString()
+                binding.playerElo.text = "AkvELOn: " + it.statsOneOnOne.AkvELOn.toInt().toString()
                 binding.BattlesCount.text = "B: " + it.statsOneOnOne.BattlesCount;
-                binding.WinRate.text =
-                    "W: " + DecimalFormat("#0.00").format(it.statsOneOnOne.WinsPresent) + "%"
+                binding.WinRate.text = "V:" + it.statsOneOnOne.WinsCount;
+                   // "W: " + DecimalFormat("#0.00").format(it.statsOneOnOne.WinsPresent) + "%"
+                binding.OneVsOneElo.text = it.statsOneOnOne.AkvELOn.toInt().toString();
+                binding.OneVsOnePercentOfWins.text = it.statsOneOnOne.WinsPresentString;
             }
         }
         ModuleContext.userViewModel.loadUserInfo(args.userId!!);

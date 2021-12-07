@@ -38,6 +38,8 @@ class LeaderboardFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner;
         binding.shortUserRecycler.layoutManager = LinearLayoutManager(requireContext());
         stupidViewModel = ModuleContext.leaderboardViewModel;
+
+
         stupidViewModel.leaders.observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.shortUserRecycler.adapter =
@@ -61,7 +63,7 @@ class LeaderboardFragment : Fragment() {
 //            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
 //        host.findNavController().navigate(R.id.action_global_battleFragment);
         ModuleContext.vKikerServer.getLobby {
-            if (!it.Access) {
+            if (it!=null && !it.Access) {
                 binding.teamAPlayer1.text = it.firstPlayerA;
                 binding.teamAPlayer2.text = it.firstPlayerA;
                 binding.teamBPlayer1.text = it.firstPlayerB;

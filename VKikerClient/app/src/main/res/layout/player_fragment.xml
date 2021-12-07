@@ -115,7 +115,7 @@
                         android:id="@+id/WinRate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="W" />
+                        android:text="V" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -216,20 +216,22 @@
                         android:text="Percent of wins" />
 
                     <TextView
+                        android:id="@+id/OneVsOnePercentOfWins"
                         android:layout_gravity="right"
-                        android:maxLength="5"
-                        android:text="@{Double.toString(player.statsOneOnOne.WinsPresent)}" />
+                        android:text="no data" />
                 </TableRow>
 
                 <TableRow>
 
                     <TextView
                         android:layout_gravity="left"
-                        android:text="ELO" />
+                        android:text="AkvELO" />
 
                     <TextView
+                        android:id="@+id/OneVsOneElo"
+
                         android:layout_gravity="right"
-                        android:text="@{Double.toString(player.statsOneOnOne.AkvELOn)}" />
+                        android:text="0" />
                 </TableRow>
 
                 <TableRow>

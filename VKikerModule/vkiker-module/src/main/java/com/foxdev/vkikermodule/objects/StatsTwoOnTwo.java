@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public final class StatsTwoOnTwo {
     @SerializedName("elo")
-    public int AkvELOn;
+    public double AkvELOn;
 
     @SerializedName("battlesInAttack")
     public int BattlesCountInAttack;

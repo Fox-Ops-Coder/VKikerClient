@@ -56,7 +56,7 @@ class LeaderboardRecyclerAdapter(
         holder.card?.setOnClickListener() {
             goToUserCall(user.user.ID);
         }
-        holder.akvElo?.text = "AkvELOn:" + user.ELO.toString();
+        holder.akvElo?.text = "AkvELOn:" + user.ELO.toInt().toString();
         holder.battlesCount?.text = "B: " + user.Battles.toString();
         holder.winRate?.text = "V: " + user.Wins.toString();
         val colorId = when (shorUsers[position].IntNumber) {
